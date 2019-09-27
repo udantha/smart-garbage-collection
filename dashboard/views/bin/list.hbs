@@ -1,0 +1,22 @@
+<h3><a class="btn btn-secondary" href="/bin"><i class="fa fa-plus"></i> Create New</a> Bin List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Bin ID</th>
+            <th>Bin Height</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each list}}
+        <tr>
+            <td>{{this.binId}}</td>
+            <td>{{this.binHeight}}</td>
+            <td>
+                <a href="/bin/{{this._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/bin/delete/{{this._id}}" onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

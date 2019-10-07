@@ -1,0 +1,28 @@
+<h3>{{viewTitle}}</h3>
+
+<form action="/bin" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{bin._id}}">
+    <div class="form-group">
+        <label>Bin Unique Id</label>
+        <input type="text" class="form-control" name="binId" placeholder="Bin ID" value="{{bin.binId}}">
+        <div class="text-danger">
+            {{bin.idError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Bin Height</label>
+        <input type="text" class="form-control" name="binHeight" placeholder="Height" value="{{bin.binHeight}}">
+        <div class="text-danger">
+            {{bin.heightError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Bin Location</label>
+        <i>{{bin.binLocation.coordinates}}</i>
+        <input type="text" class="form-control" name="lat" placeholder="Lattitude" value="">
+        <input type="text" class="form-control" name="lon" placeholder="Longitude" value="">
+
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+        <a class="btn btn-secondary" href="/bin/list"><i class="fa fa-list-alt"></i> View All</a>
+    </div>
+</form>

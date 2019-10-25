@@ -11,17 +11,26 @@ var binSchema = new mongoose.Schema({
         type: Number,
         required: 'This field is required.'
     },
-    currentBinHeight: {
+    currentMetalBinHeight: {
         type: Number
     },
-    binHeightUpatedOn: {
+    binMetalHeightUpatedOn: {
+        type: Date
+    },
+    currentAllBinHeight: {
+        type: Number
+    },
+    binAllHeightUpatedOn: {
         type: Date
     },
     binLocation: {
-        type: { type: String, default: 'Point' },
+        type: { type: String, enum: ['Point'], default: 'Point' },
         coordinates: { type: [Number], default: [0, 0], index: '2dsphere' }
     },
     binCreatedOn: {
+        type: Date
+    },
+    lastCollectedOn: {
         type: Date
     },
 });

@@ -17,9 +17,11 @@
     <div class="form-group">
         <label>Bin Location</label>
         <i>{{bin.binLocation.coordinates}}</i>
-        <input type="text" class="form-control" name="lat" placeholder="Lattitude" value="">
-        <input type="text" class="form-control" name="lon" placeholder="Longitude" value="">
-
+        <input type="text" class="form-control" name="lonlat" placeholder="Longitude, Lattitude" value="{{bin.binLocation.coordinates}}">
+    </div>
+    <div class="form-group">
+        <label>Last Collected At</label>
+        <input type="date" class="form-control" name="lastCollectedOn" placeholder="Date" value="{{bin.lastCollectedOn}}">
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>

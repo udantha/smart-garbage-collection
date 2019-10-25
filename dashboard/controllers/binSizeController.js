@@ -16,6 +16,18 @@ router.get('/list', (req, res) => {
     });
 });
 
+router.get('/json', (req, res) => {
+    GarbageBin.find((err, docs) => {
+        if (!err) {
+            res.json(docs)
+        }
+        else {
+            res.json({error: 'List not available'})
+            console.log('Error in retrieving bin list :' + err);
+        }
+    });
+});
+
 router.get('/', (req, res) => {
     res.render("bin/addOrEdit", {
         viewTitle: "Create Bin"
@@ -56,8 +68,11 @@ function insertRecord(req, res) {
     bin.binLocation = {
         type: 'Point',
         // Place longitude first, then latitude
-        coordinate: [req.body.lon, req.body.lat]
+        coordinates: req.body.lonlat.explode(',').map(d => d.trim())
     };
+    bin.binCreatedOn = new Date();
+    bin.lastCollectedOn = req.body.lastCollectedOn;
+
     bin.save((err, doc) => {
         if (!err)
             res.redirect('bin/list');
@@ -76,7 +91,16 @@ function insertRecord(req, res) {
 }
 
 function updateRecord(req, res) {
-    GarbageBin.findOneAndUpdate({ _id: req.body._id }, req.body, { new: true }, (err, doc) => {
+    var bin = {};
+    bin.binId = req.body.binId;
+    bin.binHeight = req.body.binHeight;
+    bin.binLocation = {
+        type: 'Point',
+        coordinates: req.body.lonlat.split(',').map(d => d.trim())
+    };
+    bin.lastCollectedOn = req.body.lastCollectedOn;
+
+    GarbageBin.findOneAndUpdate({ _id: req.body._id }, bin, { new: true }, (err, doc) => {
         if (!err) { res.redirect('bin/list'); }
         else {
             if (err.name == 'ValidationError') {

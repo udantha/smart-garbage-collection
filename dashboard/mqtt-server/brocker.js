@@ -6,5 +6,5 @@ var settings = {
 var server = new mosca.Server(settings);
 
 server.on('ready', function () {
-    console.log("ready");
+    console.log("inside broker ready");
 });

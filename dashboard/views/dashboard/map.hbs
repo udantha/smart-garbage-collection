@@ -61,6 +61,10 @@
                         icon = 'garbage-collect.png'
                     }
                 }
+
+                if(bin.currentAllBinHeight && bin.currentAllBinHeight >40){
+                    icon = 'garbage-collect.png';
+                }
                 marker = new google.maps.Marker({
                     position: position,
                     map: map,

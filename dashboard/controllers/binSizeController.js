@@ -68,7 +68,7 @@ function insertRecord(req, res) {
     bin.binLocation = {
         type: 'Point',
         // Place longitude first, then latitude
-        coordinates: req.body.lonlat.explode(',').map(d => d.trim())
+        coordinates: req.body.lonlat.split(',').map(d => d.trim())
     };
     bin.binCreatedOn = new Date();
     bin.lastCollectedOn = req.body.lastCollectedOn;

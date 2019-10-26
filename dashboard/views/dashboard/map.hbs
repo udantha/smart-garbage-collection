@@ -1,0 +1,84 @@
+<style>
+    /* Set the size of the div element that contains the map */
+    #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+    }
+</style>
+
+<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+    <img class="mr-3" src="/garbage-icon.png" alt="" width="48" height="48">
+    <div class="lh-100">
+      <h6 class="mb-0 text-white lh-100">Dashboard</h6>
+      <small>Live map with highlighted collectable bins</small>
+    </div>
+  </div>
+
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Collectable Map</h6>
+    <div class="media text-muted pt-3">
+      <div id="map"></div>
+    </div>
+  </div>
+
+
+<script src="/jquery-3.4.1.min.js"></script>
+<script>
+    // Initialize and add the map
+    function initMap() {
+        // The location of Uluru
+        var uluru = { lat: -25.344, lng: 131.036 };
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), { 
+                zoom: 14,
+                styles: [{
+                    featureType: "poi",
+                    stylers: [ { visibility: "off" } ]   
+                }],
+                disableDefaultUI: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+             });
+
+        // create map bounds object
+        var bounds = new google.maps.LatLngBounds();
+        var infowindow = new google.maps.InfoWindow();
+
+        //get locations
+        $.getJSON('/bin/json', function(data){
+            for ( var i = 0; i < data.length; i++ ){
+                var bin = data[ i ];
+                let position = new google.maps.LatLng(bin.binLocation.coordinates[0], bin.binLocation.coordinates[1]);
+                // add position to bounds
+				bounds.extend( position );
+
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    icon: "/garbage.png",
+                    title: `Bin ID ${bin.binId}`
+                });
+
+                // create info window and add to marker (https://developers.google.com/maps/documentation/javascript/reference#InfoWindowOptions)
+				google.maps.event.addListener( marker, 'click', ( 
+					function( marker, i ) {
+						return function() {
+							var infowindow = new google.maps.InfoWindow();
+							infowindow.setContent( data[ i ] );
+							infowindow.open( map, marker );
+						}
+					}
+				)( marker, i ) )
+            }
+            
+            // fit map to bounds
+			map.fitBounds( bounds );
+        })
+    }
+</script>
+
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkdlknh7SeqeE3O34Hg5lqIX0RU1LDFgA&callback=initMap" type="text/javascript"></script>

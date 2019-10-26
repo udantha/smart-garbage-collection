@@ -1,30 +1,43 @@
-<h3>{{viewTitle}}</h3>
+<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+    <img class="mr-3" src="/garbage-icon.png" alt="" width="48" height="48">
+    <div class="lh-100">
+      <h6 class="mb-0 text-white lh-100">{{viewTitle}}</h6>
+      <small>Add or Edit garbage bins</small>
+    </div>
+  </div>
 
-<form action="/bin" method="POST" autocomplete="off">
-    <input type="hidden" name="_id" value="{{bin._id}}">
-    <div class="form-group">
-        <label>Bin Unique Id</label>
-        <input type="text" class="form-control" name="binId" placeholder="Bin ID" value="{{bin.binId}}">
-        <div class="text-danger">
-            {{bin.idError}}</div>
+<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="media text-muted pt-3">
+        
+        <form action="/bin" method="POST" autocomplete="off">
+            <input type="hidden" name="_id" value="{{bin._id}}">
+            <div class="form-group">
+                <label>Bin Unique Id</label>
+                <input type="text" class="form-control" name="binId" placeholder="Bin ID" value="{{bin.binId}}">
+                <div class="text-danger">
+                    {{bin.idError}}</div>
+            </div>
+            <div class="form-group">
+                <label>Bin Height</label>
+                <input type="text" class="form-control" name="binHeight" placeholder="Height" value="{{bin.binHeight}}">
+                <div class="text-danger">
+                    {{bin.heightError}}</div>
+            </div>
+            <div class="form-group">
+                <label>Bin Location</label>
+                <i>{{bin.binLocation.coordinates}}</i>
+                <input type="text" class="form-control" name="lonlat" placeholder="Longitude, Lattitude" value="{{bin.binLocation.coordinates}}">
+            </div>
+            <div class="form-group">
+                <label>Last Collected At</label>
+                <input type="date" class="form-control" name="lastCollectedOn" placeholder="Date" value="{{bin.lastCollectedOn}}">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
+                <a class="btn btn-secondary" href="/bin/list"><i class="fa fa-list-alt"></i> View All</a>
+            </div>
+        </form>
+
     </div>
-    <div class="form-group">
-        <label>Bin Height</label>
-        <input type="text" class="form-control" name="binHeight" placeholder="Height" value="{{bin.binHeight}}">
-        <div class="text-danger">
-            {{bin.heightError}}</div>
-    </div>
-    <div class="form-group">
-        <label>Bin Location</label>
-        <i>{{bin.binLocation.coordinates}}</i>
-        <input type="text" class="form-control" name="lonlat" placeholder="Longitude, Lattitude" value="{{bin.binLocation.coordinates}}">
-    </div>
-    <div class="form-group">
-        <label>Last Collected At</label>
-        <input type="date" class="form-control" name="lastCollectedOn" placeholder="Date" value="{{bin.lastCollectedOn}}">
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
-        <a class="btn btn-secondary" href="/bin/list"><i class="fa fa-list-alt"></i> View All</a>
-    </div>
-</form>
+  </div>
+

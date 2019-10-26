@@ -49,7 +49,7 @@ try:
     motorMain.stop()
 
     # broadcast measurement via MQTT
-    publish.single(MQTT_CHANNEL_GARBAGE, GARBAGE_BIN_ID + ':' + str(distance) + ':' + targetBinType, hostname=MQTT_SERVER)
+    publish.single(MQTT_CHANNEL_GARBAGE, GARBAGE_BIN_ID + ':' + str(30) + ':' + targetBinType, hostname=MQTT_SERVER)
 
 
 #except KeyboardInterrupt:

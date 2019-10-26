@@ -33,6 +33,22 @@
                 <input type="date" class="form-control" name="lastCollectedOn" placeholder="Date" value="{{bin.lastCollectedOn}}">
             </div>
             <div class="form-group">
+                <label>Metal Bin Height</label>
+                {{bin.currentMetalBinHeight}}
+            </div>
+            <div class="form-group">
+                <label>Metal Bin Height Updated On</label>
+                <p>{{bin.binMetalHeightUpatedOn}}</p>
+            </div>
+            <div class="form-group">
+                <label>Other type Bin Height</label>
+                <p>{{bin.currentAllBinHeight}}</p>
+            </div>
+            <div class="form-group">
+                <label>Other type Bin Height Updated On</label>
+                <p>{{bin.binAllHeightUpatedOn}}</p>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
                 <a class="btn btn-secondary" href="/bin/list"><i class="fa fa-list-alt"></i> View All</a>
             </div>

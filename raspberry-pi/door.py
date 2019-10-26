@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import sys
-#import paho.mqtt.publish as publish
+import paho.mqtt.publish as publish
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -49,7 +49,7 @@ try:
     motorMain.stop()
 
     # broadcast measurement via MQTT
-    #publish.single(MQTT_CHANNEL_GARBAGE, GARBAGE_BIN_ID + ':' + str(30) + ':' + targetBinType, hostname=MQTT_SERVER)
+    publish.single(MQTT_CHANNEL_GARBAGE, GARBAGE_BIN_ID + ':' + str(30) + ':' + targetBinType, hostname=MQTT_SERVER)
 
 
 #except KeyboardInterrupt:

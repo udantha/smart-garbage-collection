@@ -54,11 +54,18 @@
                 // add position to bounds
 				bounds.extend( position );
 
+                var icon = 'garbage.png';
+                if(bin.lastCollectedOn){
+                    let updatedDate = (new Date(bin.lastCollectedOn)).getTime();
+                    if(updatedDate < ((new Date()).getTime() - 3*24*60*60*1000)){
+                        icon = 'garbage-collect.png'
+                    }
+                }
                 marker = new google.maps.Marker({
                     position: position,
                     map: map,
                     animation: google.maps.Animation.DROP,
-                    icon: "/garbage.png",
+                    icon: "/"+ icon,
                     title: `Bin ID ${bin.binId}`
                 });
 
@@ -66,8 +73,10 @@
 				google.maps.event.addListener( marker, 'click', ( 
 					function( marker, i ) {
 						return function() {
+                            let bin = data[i];
+                            var content = `<h4>Bin ID ${bin.binId} </h4><p><a target="blank" href="/bin/${bin._id}">Edit Bin</a></p>`;
 							var infowindow = new google.maps.InfoWindow();
-							infowindow.setContent( data[ i ] );
+							infowindow.setContent( content );
 							infowindow.open( map, marker );
 						}
 					}

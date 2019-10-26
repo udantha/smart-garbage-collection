@@ -1,5 +1,5 @@
 var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://127.0.0.1');
+var client = mqtt.connect('mqtt://192.168.8.100');
 client.on('connect', function () {
     setInterval(function () {
         var rand = (new Date()).getSeconds();

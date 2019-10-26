@@ -4,7 +4,7 @@ require('../models/db');
 
 const GarbageBin = mongoose.model('Bin');
 
-var IP_ADDRESS = '127.0.0.1';
+var IP_ADDRESS = '192.168.8.100';
 var CHANNEL = 'channel_garbage_amount';
 
 var client = mqtt.connect('mqtt://' + IP_ADDRESS)

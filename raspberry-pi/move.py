@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 # initialize variables
-MQTT_SERVER = "192.168.1.5"
+MQTT_SERVER = "192.168.8.100"
 MQTT_CHANNEL_GARBAGE = "channel_garbage_amount"
 GARBAGE_BIN_ID = "20"
 GARBAGE_BIN_TYPE_METAL = "BIN_METAL"

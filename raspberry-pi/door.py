@@ -50,7 +50,7 @@ try:
 
     # broadcast measurement via MQTT
     publish.single(MQTT_CHANNEL_GARBAGE, GARBAGE_BIN_ID + ':' +
-                   str(30) + ':BIN_NON_METAL', hostname=MQTT_SERVER)
+                   str(50) + ':BIN_NON_METAL', hostname=MQTT_SERVER)
 
 
 #except KeyboardInterrupt:

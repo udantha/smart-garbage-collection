@@ -15,7 +15,7 @@ GPIO.setup(PIN_IR_RECEIVER, GPIO.IN)
 # Listen for IR break to catch Initiation
 try:
     while True:
-        GPIO.output(PIN_US_TRIGGER, True)
+        GPIO.output(PIN_IR_TRIGGER, True)
 
         if GPIO.input(PIN_IR_RECEIVER):
             print "Object Detected"

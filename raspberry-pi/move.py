@@ -11,15 +11,18 @@ GARBAGE_BIN_TYPE_ALL = "BIN_NON_METAL"
 
 # Pin numbers
 PIN_US_TRIGGER = 12
-PIN_US_ECHO = 18
+PIN_US_ECHO = 11
 PIN_MOTOR_DOOR = 12
 PIN_MOTOR_MAIN = 11
-PIN_IR_TRIGGER = 16
+PIN_IR_TRIGGER = 15
+PIN_IR_RECEIVER = 16
 
 GPIO.setmode(GPIO.BOARD)
 
 # IR Sensor
-GPIO.setup(PIN_IR_TRIGGER, GPIO.IN)
+GPIO.setup(PIN_IR_TRIGGER, GPIO.OUT)
+#GPIO.output(PIN_IR_TRIGGER, True)
+GPIO.setup(PIN_IR_RECEIVER, GPIO.IN)
 # End IR Sensor
 
 # Start configure pins for Door motor
@@ -40,6 +43,31 @@ GPIO.setup(PIN_US_TRIGGER, GPIO.OUT)
 GPIO.output(PIN_US_TRIGGER, False)
 GPIO.setup(PIN_US_ECHO, GPIO.IN)
 # End for distance
+
+# Function definitions
+
+
+def getGarbageMeasurement():
+    # Waiting For Sensor1 To Settle
+    time.sleep(.1)
+    GPIO.output(PIN_US_TRIGGER, True)
+    time.sleep(0.00001)
+    GPIO.output(PIN_US_TRIGGER, False)
+
+    while GPIO.input(PIN_US_ECHO) == 0:
+        pass
+        pulse_start1 = time.time()
+
+    while GPIO.input(PIN_US_ECHO) == 1:
+        pass
+        pulse_end1 = time.time()
+
+    pulse_duration1 = pulse_end1 - pulse_start1
+
+    distanceInCM = pulse_duration1 * 17150
+    distanceInCM = round(distanceInCM, 2)
+    time.sleep(10)
+    return distanceInCM
 
 # Listen for IR break to catch Initiation
 try:
@@ -97,24 +125,3 @@ GPIO.cleanup()
 #     pwm.ChangeDutyCycle(0)
 
 
-def getGarbageMeasurement():
-    # Waiting For Sensor1 To Settle
-    time.sleep(.1)
-    GPIO.output(PIN_US_TRIGGER, True)
-    time.sleep(0.00001)
-    GPIO.output(PIN_US_TRIGGER, False)
-
-    while GPIO.input(PIN_US_ECHO) == 0:
-        pass
-        pulse_start1 = time.time()
-
-    while GPIO.input(PIN_US_ECHO) == 1:
-        pass
-        pulse_end1 = time.time()
-
-    pulse_duration1 = pulse_end1 - pulse_start1
-
-    distanceInCM = pulse_duration1 * 17150
-    distanceInCM = round(distanceInCM, 2)
-    time.sleep(10)
-    return distanceInCM

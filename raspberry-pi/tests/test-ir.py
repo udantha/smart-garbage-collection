@@ -17,6 +17,7 @@ GPIO.setup(PIN_IR_RECEIVER, GPIO.IN)
 try:
     while True:
         GPIO.output(PIN_IR_TRIGGER, True)
+        # print "Trigger Value - " + str(GPIO.input(PIN_IR_TRIGGER))
         print "Output - " + str(GPIO.input(PIN_IR_RECEIVER))
         time.sleep(0.2)
         #GPIO.output(PIN_IR_TRIGGER, False)

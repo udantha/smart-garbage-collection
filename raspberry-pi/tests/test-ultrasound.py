@@ -7,13 +7,6 @@ GPIO.setmode(GPIO.BOARD)
 PIN_US_TRIGGER = 12
 PIN_US_ECHO = 11
 
-try:
-    print "Height in CM - " + str(getGarbageMeasurement())
-except KeyboardInterrupt:
-    GPIO.cleanup()
-
-GPIO.cleanup()
-
 def getGarbageMeasurement():
     # Waiting For Sensor1 To Settle
     time.sleep(.1)
@@ -35,3 +28,11 @@ def getGarbageMeasurement():
     distanceInCM = round(distanceInCM, 2)
     time.sleep(10)
     return distanceInCM
+
+try:
+    print "Height in CM - " + str(getGarbageMeasurement())
+except KeyboardInterrupt:
+    GPIO.cleanup()
+
+GPIO.cleanup()
+

@@ -22,4 +22,7 @@ try:
     time.sleep(1)  # sleep 1 second
     motorGateDoor.stop()
     
+except KeyboardInterrupt:
     GPIO.cleanup()
+
+GPIO.cleanup()

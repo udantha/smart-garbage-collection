@@ -7,6 +7,12 @@ GPIO.setmode(GPIO.BOARD)
 PIN_US_TRIGGER = 12
 PIN_US_ECHO = 11
 
+# Start configure pins for distance
+GPIO.setup(PIN_US_TRIGGER, GPIO.OUT)
+GPIO.output(PIN_US_TRIGGER, False)
+GPIO.setup(PIN_US_ECHO, GPIO.IN)
+# End for distance
+
 def getGarbageMeasurement():
     # Waiting For Sensor1 To Settle
     time.sleep(.1)

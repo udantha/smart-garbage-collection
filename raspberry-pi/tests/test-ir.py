@@ -16,14 +16,14 @@ GPIO.setup(PIN_IR_RECEIVER, GPIO.IN)
 try:
     while True:
         GPIO.output(PIN_IR_TRIGGER, True)
-
-        if GPIO.input(PIN_IR_RECEIVER):
-            print "Object Detected"
-            while GPIO.input(PIN_IR_RECEIVER):
-                time.sleep(0.2)
-        else:
-            print "No Object"
-            time.sleep(0.2)
+        print "Output - " + str(GPIO.input(PIN_IR_RECEIVER))
+        # if GPIO.input(PIN_IR_RECEIVER):
+        #     print "Object Detected"
+        #     while GPIO.input(PIN_IR_RECEIVER):
+        #         time.sleep(0.2)
+        # else:
+        #     print "No Object"
+        #     time.sleep(0.2)
 
 except KeyboardInterrupt:
     GPIO.cleanup()

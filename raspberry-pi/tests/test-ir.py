@@ -8,6 +8,7 @@ PIN_IR_RECEIVER = 16
 
 # IR Sensor
 GPIO.setup(PIN_IR_TRIGGER, GPIO.OUT)
+GPIO.output(PIN_IR_TRIGGER, False)
 GPIO.setup(PIN_IR_RECEIVER, GPIO.IN)
 # End IR Sensor
 

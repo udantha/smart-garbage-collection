@@ -10,7 +10,7 @@ PIN_MOTOR_DOOR = 7
 GPIO.setup(PIN_MOTOR_DOOR, GPIO.OUT)  # output to send our PWM signal on
 motorGateDoor = GPIO.PWM(PIN_MOTOR_DOOR, 50)  # setup PWM on pin #3 at 50Hz
 # start it with 0 duty cycle so it doesn't set any angles on startup
-motorGateDoor.start(-7.5)
+motorGateDoor.start(0)
 # End Door motor
 
 # try:

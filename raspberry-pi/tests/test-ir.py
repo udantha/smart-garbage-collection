@@ -18,8 +18,9 @@ try:
     while True:
         GPIO.output(PIN_IR_TRIGGER, True)
         print "Output - " + str(GPIO.input(PIN_IR_RECEIVER))
-        GPIO.output(PIN_IR_TRIGGER, False)
         time.sleep(0.2)
+        GPIO.output(PIN_IR_TRIGGER, False)
+
         # if GPIO.input(PIN_IR_RECEIVER):
         #     print "Object Detected"
         #     while GPIO.input(PIN_IR_RECEIVER):

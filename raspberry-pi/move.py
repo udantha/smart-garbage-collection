@@ -1,6 +1,6 @@
 import paho.mqtt.publish as publish
 import RPi.GPIO as GPIO
-from time import sleep
+import time
 
 # initialize variables
 MQTT_SERVER = "192.168.8.100"

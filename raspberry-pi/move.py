@@ -116,9 +116,9 @@ try:
             # 5. back to original position
             # turn the opening towards default all position
             print "Main motor back to start."
-            #motorMain.ChangeDutyCycle(2)  # turn towards 0 degree
+            motorMain.ChangeDutyCycle(2)  # turn towards 0 degree
             time.sleep(0.5)
-            #motorMain.stop()
+            motorMain.stop()
 
             print "====================== Completed a Cycle ======================"
             while GPIO.input(PIN_IR_TRIGGER):

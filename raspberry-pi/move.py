@@ -1,6 +1,7 @@
 import paho.mqtt.publish as publish
 import RPi.GPIO as GPIO
 import time
+import random
 
 # initialize variables
 MQTT_SERVER = "192.168.8.100"
@@ -77,21 +78,28 @@ try:
     while True:
         switchState = GPIO.input(PIN_SWITCH)
         if (GPIO.input(PIN_IR_TRIGGER)) or (switchState == False):
+            print "====================== Garbage Detected.. ======================"
             # 1. Initiate Metal detector
             # Set the target bin
-            targetBinType = GARBAGE_BIN_TYPE_ALL  # or GARBAGE_BIN_TYPE_METAL based on
+            garbageTypeRandomTmp = [GARBAGE_BIN_TYPE_ALL, GARBAGE_BIN_TYPE_METAL]
+            # or GARBAGE_BIN_TYPE_METAL based on
+            targetBinType = random.choice(garbageTypeRandomTmp)
 
             # 2. decide which way to turn and Turn
             if targetBinType == GARBAGE_BIN_TYPE_METAL:
+                print "Garbage Type is METAL"
                 # turn the opening towards metal
                 motorMain.ChangeDutyCycle(7.5)  # turn towards 90 degree
                 time.sleep(0.5)
-
+            else:
+                print "Garbage Type is ALL"
             # 3. Open gate and drop garbage
             # open
+            print "Open Gate"
             motorGateDoor.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
             time.sleep(1)
             # close
+            print "Gate closed"
             motorGateDoor.ChangeDutyCycle(2.5)  # turn towards 0 degree
             time.sleep(1)  # sleep 1 second
             motorGateDoor.stop()
@@ -99,16 +107,19 @@ try:
             # 4. Get garbage size
             # fire up calculating measurement
             distance = getGarbageMeasurement()
+            print "Garbage height is " + str(distance) + " cm"
 
             # broadcast measurement via MQTT
             publish.single(MQTT_CHANNEL_GARBAGE, GARBAGE_BIN_ID + ':' + str(distance) + ':' + targetBinType, hostname=MQTT_SERVER)
 
             # 5. back to original position
             # turn the opening towards default all position
+            print "Main motor back to start."
             motorMain.ChangeDutyCycle(2.5)  # turn towards 0 degree
             time.sleep(0.5)
             motorMain.stop()
 
+            print "====================== Completed a Cycle ======================"
             while GPIO.input(PIN_IR_TRIGGER):
                 time.sleep(0.2)
 

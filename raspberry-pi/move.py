@@ -16,6 +16,7 @@ PIN_MOTOR_DOOR = 7
 PIN_MOTOR_MAIN = 40
 PIN_IR_TRIGGER = 15
 PIN_IR_RECEIVER = 16
+PIN_SWITCH = 38
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -44,9 +45,11 @@ GPIO.output(PIN_US_TRIGGER, False)
 GPIO.setup(PIN_US_ECHO, GPIO.IN)
 # End for distance
 
+# Configure Switch
+GPIO.setup(PIN_SWITCH, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# End switch configuration
+
 # Function definitions
-
-
 def getGarbageMeasurement():
     # Waiting For Sensor1 To Settle
     time.sleep(.1)
@@ -72,7 +75,8 @@ def getGarbageMeasurement():
 # Listen for IR break to catch Initiation
 try:
     while True:
-        if GPIO.input(PIN_IR_TRIGGER):
+        switchState = GPIO.input(PIN_SWITCH)
+        if (GPIO.input(PIN_IR_TRIGGER)) or (switchState == False):
             # 1. Initiate Metal detector
             # Set the target bin
             targetBinType = GARBAGE_BIN_TYPE_ALL  # or GARBAGE_BIN_TYPE_METAL based on

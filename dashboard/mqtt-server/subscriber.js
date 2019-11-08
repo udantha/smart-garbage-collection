@@ -4,7 +4,7 @@ require('../models/db');
 
 const GarbageBin = mongoose.model('Bin');
 
-var IP_ADDRESS = '192.168.8.100';
+var IP_ADDRESS = '192.168.8.103';
 var CHANNEL = 'channel_garbage_amount';
 
 var client = mqtt.connect('mqtt://' + IP_ADDRESS)
@@ -22,6 +22,7 @@ client.on('message', function (topic, message) {
         var binType = payload[2];
         var record = {};
 
+        console.log('=============== MQTT Message received ===============');
         if (binType =='BIN_METAL'){
             record = {
                 currentMetalBinHeight: height,
@@ -41,11 +42,14 @@ client.on('message', function (topic, message) {
 
 function updateRecord(id, data) {
     GarbageBin.findOneAndUpdate({ binId: id }, data, { new: true }, (err, doc) => {
-        if (!err) { console.log('saved data'); }
+        if (!err) { 
+            console.log('saved data'); 
+            console.log(JSON.stringify(data, null, "  "));
+        }
         else {
             console.log('Error during record update : ' + err);
         }
     }).then(data => {
-        console.log(data)
+        console.log('=============== End ===============')
     });
 }

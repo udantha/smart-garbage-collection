@@ -30,14 +30,13 @@ GPIO.setup(PIN_IR_RECEIVER, GPIO.IN)
 # Start configure pins for Door motor
 GPIO.setup(PIN_MOTOR_DOOR, GPIO.OUT)  # output to send our PWM signal on
 motorGateDoor = GPIO.PWM(PIN_MOTOR_DOOR, 50)  # setup PWM on pin #3 at 50Hz
-# start it with 0 duty cycle so it doesn't set any angles on startup
-motorGateDoor.start(0)
+
 # End Door motor
 
 # Main motor
 GPIO.setup(PIN_MOTOR_MAIN, GPIO.OUT)
 motorMain = GPIO.PWM(PIN_MOTOR_MAIN, 50)
-motorMain.start(0)
+
 # End Main motor
 
 # Start configure pins for distance
@@ -79,6 +78,10 @@ try:
         switchState = GPIO.input(PIN_SWITCH)
         if (GPIO.input(PIN_IR_TRIGGER)) or (switchState == False):
             print "====================== Garbage Detected.. ======================"
+            # start it with 0 duty cycle so it doesn't set any angles on startup
+            motorGateDoor.start(0)
+            motorMain.start(0)
+            
             # 1. Initiate Metal detector
             # Set the target bin
             garbageTypeRandomTmp = [GARBAGE_BIN_TYPE_ALL, GARBAGE_BIN_TYPE_METAL]

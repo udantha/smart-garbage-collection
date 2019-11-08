@@ -83,7 +83,7 @@ try:
             # Set the target bin
             garbageTypeRandomTmp = [GARBAGE_BIN_TYPE_ALL, GARBAGE_BIN_TYPE_METAL]
             # or GARBAGE_BIN_TYPE_METAL based on
-            targetBinType = GARBAGE_BIN_TYPE_METAL #random.choice(garbageTypeRandomTmp)
+            targetBinType = random.choice(garbageTypeRandomTmp)
 
             # 2. decide which way to turn and Turn
             if targetBinType == GARBAGE_BIN_TYPE_METAL:
@@ -116,9 +116,9 @@ try:
             # 5. back to original position
             # turn the opening towards default all position
             print "Main motor back to start."
-            #motorMain.ChangeDutyCycle(2)  # turn towards 0 degree
+            motorMain.ChangeDutyCycle(2)  # turn towards 0 degree
             time.sleep(0.5)
-            #motorMain.stop()
+            motorMain.stop()
 
             print "====================== Completed a Cycle ======================"
             while GPIO.input(PIN_IR_TRIGGER):

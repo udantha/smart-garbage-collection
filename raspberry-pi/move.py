@@ -12,8 +12,8 @@ GARBAGE_BIN_TYPE_ALL = "BIN_NON_METAL"
 # Pin numbers
 PIN_US_TRIGGER = 12
 PIN_US_ECHO = 11
-PIN_MOTOR_DOOR = 12
-PIN_MOTOR_MAIN = 11
+PIN_MOTOR_DOOR = 7
+PIN_MOTOR_MAIN = 40
 PIN_IR_TRIGGER = 15
 PIN_IR_RECEIVER = 16
 
@@ -109,9 +109,14 @@ try:
                 time.sleep(0.2)
 
 except KeyboardInterrupt:
-    GPIO.cleanup()
+    print "Garbage Ending."
 
-GPIO.cleanup()
+except:
+    # this catches ALL other exceptions including errors.
+    print "exception occurred!"
+
+finally:
+    GPIO.cleanup()  # this ensures a clean exit
 
 # === method registrations ===
 

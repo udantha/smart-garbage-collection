@@ -4,7 +4,7 @@ import time
 GPIO.setmode(GPIO.BOARD)
 
 # Pin numbers
-PIN_MOTOR_DOOR = 7
+PIN_MOTOR_DOOR = 40
 
 # Start configure pins for Door motor
 GPIO.setup(PIN_MOTOR_DOOR, GPIO.OUT)  # output to send our PWM signal on
@@ -15,13 +15,14 @@ motorGateDoor.start(0)
 
 try:
     # open
-    motorGateDoor.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
+    # turn towards 90 degree #Open
+    motorGateDoor.ChangeDutyCycle(120 / 18 + 2)
     time.sleep(1)
     # close
-    motorGateDoor.ChangeDutyCycle(2.5)  # turn towards 0 degree
+    motorGateDoor.ChangeDutyCycle(2)  # turn towards 0 degree
     time.sleep(1)  # sleep 1 second
     motorGateDoor.stop()
-
+    
 except KeyboardInterrupt:
     GPIO.cleanup()
 

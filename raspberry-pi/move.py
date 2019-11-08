@@ -132,7 +132,7 @@ except:
     # this catches ALL other exceptions including errors.
     print "exception occurred!"
 
-finally:
+#finally:
     #GPIO.cleanup()  # this ensures a clean exit
 
 # === method registrations ===

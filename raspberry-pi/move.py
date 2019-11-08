@@ -83,7 +83,7 @@ try:
             # Set the target bin
             garbageTypeRandomTmp = [GARBAGE_BIN_TYPE_ALL, GARBAGE_BIN_TYPE_METAL]
             # or GARBAGE_BIN_TYPE_METAL based on
-            targetBinType = random.choice(garbageTypeRandomTmp)
+            targetBinType = GARBAGE_BIN_TYPE_METAL #random.choice(garbageTypeRandomTmp)
 
             # 2. decide which way to turn and Turn
             if targetBinType == GARBAGE_BIN_TYPE_METAL:

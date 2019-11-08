@@ -91,7 +91,7 @@ try:
                 # turn the opening towards metal
                 # turn towards 180 degree
                 motorMain.ChangeDutyCycle(180 / 18 + 2)
-                time.sleep(0.5)
+                time.sleep(1)
             else:
                 print "Garbage Type is ALL"
             # 3. Open gate and drop garbage

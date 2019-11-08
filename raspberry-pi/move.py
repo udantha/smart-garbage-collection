@@ -123,7 +123,6 @@ try:
             print "====================== Completed a Cycle ======================"
             while GPIO.input(PIN_IR_TRIGGER):
                 time.sleep(0.2)
-            GPIO.cleanup()
 
 except KeyboardInterrupt:
     print "Garbage Ending."
@@ -132,8 +131,8 @@ except:
     # this catches ALL other exceptions including errors.
     print "exception occurred!"
 
-#finally:
-    #GPIO.cleanup()  # this ensures a clean exit
+finally:
+    GPIO.cleanup()  # this ensures a clean exit
 
 # === method registrations ===
 

@@ -89,7 +89,8 @@ try:
             if targetBinType == GARBAGE_BIN_TYPE_METAL:
                 print "Garbage Type is METAL"
                 # turn the opening towards metal
-                motorMain.ChangeDutyCycle(7.5)  # turn towards 90 degree
+                # turn towards 180 degree
+                motorMain.ChangeDutyCycle(180 / 18 + 2)
                 time.sleep(0.5)
             else:
                 print "Garbage Type is ALL"
@@ -122,7 +123,6 @@ try:
             print "====================== Completed a Cycle ======================"
             while GPIO.input(PIN_IR_TRIGGER):
                 time.sleep(0.2)
-            GPIO.cleanup()
 
 except KeyboardInterrupt:
     print "Garbage Ending."

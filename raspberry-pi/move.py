@@ -122,6 +122,7 @@ try:
             print "====================== Completed a Cycle ======================"
             while GPIO.input(PIN_IR_TRIGGER):
                 time.sleep(0.2)
+            GPIO.cleanup()
 
 except KeyboardInterrupt:
     print "Garbage Ending."

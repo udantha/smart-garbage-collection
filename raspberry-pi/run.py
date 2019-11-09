@@ -98,11 +98,11 @@ try:
     # 3. Open gate and drop garbage
     # open
     print "Open Gate"
-    #motorGateDoor.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
+    motorGateDoor.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
     time.sleep(1)
     # close
     print "Gate closed"
-    #motorGateDoor.ChangeDutyCycle(2.5)  # turn towards 0 degree
+    motorGateDoor.ChangeDutyCycle(2.5)  # turn towards 0 degree
     time.sleep(1)  # sleep 1 second
     motorGateDoor.stop()
 

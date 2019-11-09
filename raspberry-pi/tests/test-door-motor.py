@@ -15,7 +15,7 @@ motorGateDoor.start(0)
 
 try:
     # open
-    motorGateDoor.ChangeDutyCycle(7.5)  # turn towards 90 degree #Open
+    motorGateDoor.ChangeDutyCycle(5)  # turn towards 90 degree #Open 5 = 45%
     time.sleep(1)
     # close
     motorGateDoor.ChangeDutyCycle(2.5)  # turn towards 0 degree

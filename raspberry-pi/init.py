@@ -5,7 +5,7 @@ import random
 import os
 
 # initialize variables
-MQTT_SERVER = "192.168.8.103"
+MQTT_SERVER = "192.168.8.102"
 MQTT_CHANNEL_GARBAGE = "channel_garbage_amount"
 GARBAGE_BIN_ID = "20"
 GARBAGE_BIN_TYPE_METAL = "BIN_METAL"
